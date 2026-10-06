@@ -1,28 +1,55 @@
-Algorithme CompterPhrase
+ALGORITHME Analyse_Phrase
+// ====================================================================
+// Checkpoint : Lecture d'une phrase caractère par caractère
+// Détermine : Longueur, Nombre de mots, Nombre de voyelles
+// ====================================================================
 
-Variables
-    caractere : caractère
-    longueur, mots, voyelles : entiers
+VARIABLES
+    c : CARACTERE;           // Caractère courant lu
+    longueur : ENTIER;       // Compteur 1 : Longueur de la phrase
+    nb_mots : ENTIER;        // Compteur 2 : Nombre de mots
+    nb_voyelles : ENTIER;    // Compteur 3 : Nombre de voyelles
 
-Début
-    longueur ← 0
-    mots ← 1
-    voyelles ← 0
+DEBUT
+    // 1. Initialisation des trois compteurs
+    longueur := 0;
+    nb_voyelles := 0;
+    nb_mots := 1;            // Si la phrase contient du texte, elle commence par un premier mot
 
-    Répéter
-        Lire(caractere)
-        longueur ← longueur + 1
+    // 2. Lecture du premier caractère
+    ECRIRE("Entrez le premier caractère : ");
+    LIRE(c);
 
-        Si minuscule(caractere) appartient à "aeiouyàâäéèêëîïôöùûüÿ" Alors
-            voyelles ← voyelles + 1
-        FinSi
+    // 3. Cas particulier : phrase vide composée uniquement d'un point
+    SI (c = '.') ALORS
+        nb_mots := 0;
+    FIN_SI
 
-        Si caractere = " " Alors
-            mots ← mots + 1
-        FinSi
-    Jusqu’à caractere = "."
+    // 4. Boucle de traitement caractère par caractère jusqu'au point '.'
+    TANT_QUE (c <> '.') FAIRE
+        // A. Incrémenter la longueur
+        longueur := longueur + 1;
 
-    Écrire("Longueur de la phrase : ", longueur)
-    Écrire("Nombre de mots : ", mots)
-    Écrire("Nombre de voyelles : ", voyelles)
-Fin
+        // B. Détecter la séparation de mots par un espace
+        SI (c = ' ') ALORS
+            nb_mots := nb_mots + 1;
+        FIN_SI
+
+        // C. Détecter si le caractère est une voyelle
+        SI (c = 'a' OU c = 'e' OU c = 'i' OU c = 'o' OU c = 'u' OU c = 'y' OU
+            c = 'A' OU c = 'E' OU c = 'I' OU c = 'O' OU c = 'U' OU c = 'Y') ALORS
+            nb_voyelles := nb_voyelles + 1;
+        FIN_SI
+
+        // D. Lire le caractère suivant
+        LIRE(c);
+    FIN_TANT_QUE
+
+    // 5. Prise en compte du point final dans la longueur de la phrase
+    longueur := longueur + 1;
+
+    // 6. Affichage des résultats
+    ECRIRE("Longueur de la phrase (caractères) : ", longueur);
+    ECRIRE("Nombre de mots : ", nb_mots);
+    ECRIRE("Nombre de voyelles : ", nb_voyelles);
+FIN
