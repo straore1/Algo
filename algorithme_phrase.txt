@@ -1,0 +1,28 @@
+Algorithme CompterPhrase
+
+Variables
+    caractere : caractère
+    longueur, mots, voyelles : entiers
+
+Début
+    longueur ← 0
+    mots ← 1
+    voyelles ← 0
+
+    Répéter
+        Lire(caractere)
+        longueur ← longueur + 1
+
+        Si minuscule(caractere) appartient à "aeiouyàâäéèêëîïôöùûüÿ" Alors
+            voyelles ← voyelles + 1
+        FinSi
+
+        Si caractere = " " Alors
+            mots ← mots + 1
+        FinSi
+    Jusqu’à caractere = "."
+
+    Écrire("Longueur de la phrase : ", longueur)
+    Écrire("Nombre de mots : ", mots)
+    Écrire("Nombre de voyelles : ", voyelles)
+Fin
